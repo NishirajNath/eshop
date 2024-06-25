@@ -1,12 +1,11 @@
 .Cart {
   position: fixed;
-  display: flex;
   top: 0;
   z-index: 2;
   right: 0;
   width: 400px; /* Adjust width as needed */
   height: 100%; /* Takes full height of the viewport */
-  background-color: #f1f1f1; /* Example background color */
+  background-color: #f8f7f7; /* Example background color */
   /* Add any other styling properties you need */
 }
 
@@ -15,4 +14,9 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.Cart-block-1{
+  mx: 40px;
+  scroll-padding-left:40px
 }
