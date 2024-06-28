@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useState, useEffect } from 'react';
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -50,6 +52,11 @@ export default function App() {
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    const handleLoginSuccess = () => {
+        setUsername(getUsername()); // Update username state after successful login
+        // Optionally, perform additional actions upon successful login
+    };
+
     return (
         <Router>
             <div className="App">
@@ -61,6 +68,7 @@ export default function App() {
                         <Route path="/checkout" element={<Checkout />} />
                     </Routes>
                     {isCartOpen && <Cart />}
+                    
                 </main>
             </div>
         </Router>

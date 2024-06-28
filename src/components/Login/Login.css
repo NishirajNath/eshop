@@ -1,0 +1,75 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: transparent; /* Transparent background */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.login-form {
+    background-color: #fff;
+    padding: 1.25rem; /* 20px to rem */
+    border-radius: 0.5rem; /* 8px to rem */
+    width: 18.75rem; /* 300px to rem */
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); /* 10px to rem */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem; /* 10px to rem */
+    right: 1rem; /* 10px to rem */
+    cursor: pointer;
+}
+
+form {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+form label {
+    margin-bottom: 0.5rem; /* Adjust spacing between labels */
+}
+
+form input,
+form select,
+form button {
+    margin-bottom: 1rem; /* Adjust spacing between form elements */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 0.75rem 1rem; /* Adjust button padding */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Blur the background when modal is open */
+body.modal-open {
+    overflow: hidden;
+}

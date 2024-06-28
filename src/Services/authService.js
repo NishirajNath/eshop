@@ -1,9 +1,10 @@
+// authService.js
+
 import { PublicClientApplication } from '@azure/msal-browser';
 
 const msalConfig = {
     auth: {
-        clientId: process.env.REACT_APP_B2C_CLIENT_ID,
-        authority: `https://${process.env.REACT_APP_B2C_TENANT}.b2clogin.com/${process.env.REACT_APP_B2C_TENANT}.onmicrosoft.com/${process.env.REACT_APP_B2C_POLICY_SIGN_IN}`,
+        clientId: 'your-client-id',
         redirectUri: window.location.origin,
     },
     cache: {
@@ -14,15 +15,16 @@ const msalConfig = {
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
-export const login = async () => {
+export const login = async (username, password) => {
     try {
         const loginResponse = await msalInstance.loginPopup({
             scopes: ["openid", "profile"],
+            loginHint: username,
         });
         return loginResponse;
     } catch (error) {
         console.error(error);
-        throw error; // Propagate error for handling in UI
+        throw error;
     }
 };
 
@@ -43,11 +45,11 @@ export const getAccessToken = async () => {
         return tokenResponse.accessToken;
     } catch (error) {
         console.error('Error acquiring access token:', error);
-        throw error; // Propagate error for handling in UI
+        throw error;
     }
 };
 
 export const getUsername = () => {
-    const account = msalInstance.getAllAccounts()[0];
+    const account = msalInstance.getActiveAccount();
     return account ? account.username : null;
 };

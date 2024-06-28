@@ -1,0 +1,85 @@
+.modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(0, 0, 0, 0.4) !important; /* Semi-transparent background */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 1000 !important;
+  overflow: auto !important; /* Enable scrolling for the modal itself */
+  scroll-behavior: smooth !important; /* Enable smooth scrolling */
+}
+
+.modal-content {
+  background-color: transparent !important; /* Transparent background */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.signup-form {
+  background-color: #fff !important;
+  padding: 1.25rem !important; /* 20px to rem */
+  border-radius: 0.5rem !important; /* 8px to rem */
+  width: 100% !important; /* Ensure form takes full width of modal content */
+  max-width: 25rem !important; /* Limit maximum width of the form to 400px */
+  max-height: 80vh !important; /* Maximum height for scrolling */
+  overflow-y: auto !important; /* Enable vertical scrolling */
+  display: flex !important;
+  flex-direction: column !important;
+  scroll-behavior: smooth !important; /* Enable smooth scrolling */
+}
+
+.close-button {
+  position: absolute !important;
+  top: 1rem !important; /* 10px to rem */
+  right: 1rem !important; /* 10px to rem */
+  cursor: pointer !important;
+}
+
+.inform
+{
+  height: 60% !important;
+}
+
+form {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important; /* Ensure form takes full width */
+}
+
+form label {
+  margin-bottom: 0.5rem !important; /* Adjust spacing between labels */
+}
+
+form input,
+form select {
+  margin-bottom: 1rem !important; /* Adjust spacing between inputs */
+  padding: 0.75rem !important; /* Adjust padding */
+  border: 1px solid #ccc !important;
+  border-radius: 0.25rem !important; /* 4px to rem */
+  width: calc(100% - 2rem) !important; /* Ensure input fields take full width minus padding */
+}
+
+form button {
+  padding: 0.75rem 1rem !important; /* Adjust button padding */
+  background-color: #007bff !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 0.25rem !important; /* 4px to rem */
+  cursor: pointer !important;
+  width: 100% !important; /* Ensure button takes full width */
+}
+
+form button:hover {
+  background-color: #0056b3 !important;
+}
+
+/* Blur the background when modal is open */
+body.modal-open {
+  overflow: hidden !important;
+}
