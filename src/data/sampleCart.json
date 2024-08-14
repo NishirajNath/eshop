@@ -1,0 +1,180 @@
+{
+    "source": "LC",
+    "callId": "692f1dc003474f7cb2e0dd743aa6d221",
+    "businessDate": "2024-04-08",
+    "storeid": "52",
+    "data": {
+        "resultCode": 0,
+        "resultDescription": "Success",
+        "orderId": "1108607449",
+        "Cart": {
+            "storeId": 52,
+            "terminalType": 67,
+            "depositTotal": 0.8,
+            "ebtCartWasSurchargeTotal": 0,
+            "ebtCartNowSurchargeTotal": 0,
+            "ebtCartNetSurchargeTotal": 0,
+            "cartWasTotal": 112.07,
+            "cartNowTotal": 102.29,
+            "cartSavingsTotal": 9.78,
+            "cartRewardTotal": 0,
+            "rollDepositsInPrimary": false,
+            "reportUnitPricing": true,
+            "cartItems": [
+                {
+                    "lineNumber": 1,
+                    "associatedLineNumber": 0,
+                    "correlationId": "0",
+                    "upc": "82951530717",
+                    "checkDigit": "2",
+                    "symbologyType": 0,
+                    "quantity": 1,
+                    "itemType": "Sale",
+                    "itemDesc": "VEGGIE STRAWS",
+                    "isLinkedItem": false,
+                    "salesDept": 197,
+                    "taxFlags": "NNNN",
+                    "ebtWasSurchargePrice": null,
+                    "ebtNowSurchargePrice": null,
+                    "ebtNetSurchargePrice": null,
+                    "ebtWasPrice": null,
+                    "ebtNowPrice": null,
+                    "ebtNetPrice": null,
+                    "wasPrice": 3.69,
+                    "nowPrice": 2.99,
+                    "netPrice": 2.99,
+                    "deposit": 0,
+                    "savings": 0.7,
+                    "priceChangeType": "PS",
+                    "unitPrices": [
+                        {
+                            "lineNumber": 1,
+                            "lineChildInstance": 1,
+                            "isLinkedItem": false,
+                            "wasPrice": 3.69,
+                            "nowPrice": 2.99,
+                            "deposit": 0,
+                            "savings": 0.7,
+                            "netPrice": 2.99,
+                            "rewards": null
+                        }
+                    ],
+                    "rewards": null,
+                    "tmdGmAllocation": 0,
+                    "tmdObAllocation": 0,
+                    "quantityInfo": null,
+                    "lineItemSplitId": null,
+                    "isPriceHonored": false,
+                    "beforePriceHonorNowPrice": 0,
+                    "amountPriceHonored": 0,
+                    "ebtFoodstampable": true,
+                    "clientSuppliedPrice": null
+                },
+                {
+                    "lineNumber": 2,
+                    "associatedLineNumber": 0,
+                    "correlationId": "1",
+                    "upc": "5783616826",
+                    "checkDigit": "8",
+                    "symbologyType": 0,
+                    "quantity": 1,
+                    "itemType": "Sale",
+                    "itemDesc": "CUCUMBERS",
+                    "isLinkedItem": false,
+                    "salesDept": 39,
+                    "taxFlags": "NNNN",
+                    "ebtWasSurchargePrice": null,
+                    "ebtNowSurchargePrice": null,
+                    "ebtNetSurchargePrice": null,
+                    "ebtWasPrice": null,
+                    "ebtNowPrice": null,
+                    "ebtNetPrice": null,
+                    "wasPrice": 2.19,
+                    "nowPrice": 2,
+                    "netPrice": 2,
+                    "deposit": 0,
+                    "savings": 0.19,
+                    "priceChangeType": "PS",
+                    "unitPrices": [
+                        {
+                            "lineNumber": 2,
+                            "lineChildInstance": 1,
+                            "isLinkedItem": false,
+                            "wasPrice": 2.19,
+                            "nowPrice": 2,
+                            "deposit": 0,
+                            "savings": 0.19,
+                            "netPrice": 2,
+                            "rewards": null
+                        }
+                    ],
+                    "rewards": null,
+                    "tmdGmAllocation": 0,
+                    "tmdObAllocation": 0,
+                    "quantityInfo": null,
+                    "lineItemSplitId": null,
+                    "isPriceHonored": false,
+                    "beforePriceHonorNowPrice": 0,
+                    "amountPriceHonored": 0,
+                    "ebtFoodstampable": true,
+                    "clientSuppliedPrice": null
+                }
+            ],
+            "loyalty": {
+                "mPerks": "2692522914",
+                "promoIds": [
+                    6318922,
+                    6331157
+                ],
+                "promoVars": {
+                    "5049449": 1383,
+                    "5049450": 1,
+                    "5049451": 20240101,
+                    "5634636": 1,
+                    "5644486": 0,
+                    "5670155": 1,
+                    "5830293": 1
+                },
+                "highValueSelection": null
+            },
+            "highValueSelection": null,
+            "loyaltySVIDs": null,
+            "rewards": null,
+            "reportCostingInfo": true,
+            "costingInfo": null,
+            "storeUtcOffset": "-04:00",
+            "selectedHighValueOnly": true,
+            "highValuePromos": {
+                "6318922": {
+                    "promoDesc": "",
+                    "promoNum": 6318922,
+                    "advText": null,
+                    "promptResponse": "defer",
+                    "expirationDate": null
+                }
+            },
+            "extendedRangeFee": 0,
+            "fulfillmentFee": 0,
+            "teamMember": null,
+            "promoTenders": [],
+            "selectedTender": "RTS"
+        },
+        "PromoAllocateResponse": null,
+        "Savings": {
+            "basket": {
+                "mperks": 0,
+                "specials": 9.78,
+                "coupons": 0,
+                "teamMember": 0
+            }
+        },
+        "HighValuePromos": null
+    },
+    "id": "46a75d54-d22e-4659-91b5-ba7b4f1b9b9f",
+    "orderid": "1108607449",
+    "_etag": "\"93000aa6-0000-0200-0000-6613e1f30000\"",
+    "_rid": "WNQeAOVZ3W6fI6QAAABQBA==",
+    "_self": "dbs/WNQeAA==/colls/WNQeAOVZ3W4=/docs/WNQeAOVZ3W6fI6QAAABQBA==/",
+    "_attachments": "attachments/",
+    "_ts": 1712579059
+}

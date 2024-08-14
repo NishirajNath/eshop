@@ -1,0 +1,132 @@
+:root {
+  --card-width: 18rem; /* Equivalent to 288px */
+  --card-height: 25rem; /* Equivalent to 400px */
+  --image-height: 9.375rem; /* Equivalent to 150px */
+  --gap: 1.25rem; /* Equivalent to 20px */
+  --padding: 1.25rem; /* Equivalent to 20px */
+  --padding-medium: 1.875rem; /* Equivalent to 30px */
+  --padding-large: 2.5rem; /* Equivalent to 40px */
+  --font-size: 1rem; /* Equivalent to 16px */
+  --font-size-large: 1.25rem; /* Equivalent to 20px */
+}
+
+.product-list {
+  position: relative;
+  z-index: 10;
+  padding: var(--padding); /* Default padding */
+  box-sizing: border-box; /* Ensure padding is included in total width */
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap); /* Default gap between cards */
+  justify-content: center; /* Centers the items horizontally */
+  align-items: flex-start; /* Align items at the top to prevent overlapping */
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 0.5rem; /* Rounded corners */
+  padding: 0.625rem; /* Padding inside the card */
+  width: var(--card-width); /* Fixed width for uniformity */
+  height: var(--card-height); /* Fixed height for uniformity */
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Ensures content is stacked vertically */
+  justify-content: space-between; /* Distributes space between content */
+  box-sizing: border-box; /* Ensures padding and border are included in width and height */
+  margin: 0 auto; /* Centers the card */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+.product-image {
+  width: 100%;
+  height: var(--image-height); /* Fixed height for uniformity */
+  object-fit: cover; /* Ensures image covers the area */
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0.625rem; /* Space below the image */
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem; /* Space between controls */
+  margin-top: auto; /* Pushes quantity controls to the bottom */
+}
+
+.quantity-button {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem; /* Rounded corners */
+  padding: 0.3125rem 0.625rem; /* Padding inside the button */
+  cursor: pointer;
+}
+
+.quantity-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.quantity-display {
+  font-size: var(--font-size); /* Font size for quantity display */
+}
+
+.add-to-cart-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 0.25rem; /* Rounded corners */
+  padding: 0.625rem 1.25rem; /* Padding inside the button */
+  cursor: pointer;
+}
+
+.add-to-cart-button:hover {
+  background-color: #218838;
+}
+
+/* Responsive Design for different screen sizes */
+@media (min-width: 75rem) { /* 1200px */
+  .product-list {
+    padding: var(--padding-large); /* Increased padding for large screens */
+  }
+
+  .product-grid {
+    gap: var(--gap); /* Maintain default gap */
+  }
+}
+
+@media (max-width: 75rem) and (min-width: 62rem) { /* 992px */
+  .product-list {
+    padding: var(--padding-medium); /* Moderate padding for medium screens */
+  }
+
+  .product-grid {
+    gap: 0.9375rem; /* Reduced gap for medium screens */
+  }
+}
+
+@media (max-width: 62rem) and (min-width: 48rem) { /* 768px */
+  .product-list {
+    padding: var(--padding); /* Reduced padding for small screens */
+  }
+
+  .product-grid {
+    gap: 0.625rem; /* Further reduced gap for small screens */
+  }
+}
+
+@media (max-width: 48rem) { /* 768px */
+  .product-list {
+    padding: 0.9375rem; /* Minimum padding for very small screens */
+  }
+
+  .product-grid {
+    gap: 0.3125rem; /* Minimum gap for very small screens */
+  }
+
+  .product-card {
+    width: 100%; /* Full width on very small screens */
+    height: auto; /* Adjust height based on content */
+  }
+}

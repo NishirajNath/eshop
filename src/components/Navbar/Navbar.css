@@ -1,4 +1,76 @@
+.navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 1rem !important;
+    background-color: #fff !important;
+    border-bottom: 1px solid #ccc !important;
+    height: 80px; /* Set a fixed height for the navbar */
+}
+
+.navbar-brand {
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+    line-height: 1; /* Adjust line-height to align vertically */
+    height: 100%; /* Ensure the brand element takes full height of the navbar */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-button {
+    margin: 0 1rem !important;
+    cursor: pointer !important;
+    display: flex;
+    align-items: center;
+    height: 100%; /* Ensure buttons take full height of the navbar */
+}
+
 .form1 {
-  display: flex !important;
-  flex-direction: row !important;
+    display: flex !important;
+    flex-direction: row !important;
+    width: 50% !important;
+    height: 2.5rem; /* Set a fixed height for the form */
+}
+
+.form-control {
+    padding: 0.5rem !important;
+    margin-right: 0.5rem !important;
+    height: 100%; /* Ensure input field takes full height of the form */
+    flex: 1; /* Allow the input to fill available space */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.btn-outline-success {
+    height: 100%; /* Ensure button takes full height of the form */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem; /* Adjust padding for button */
+}
+
+.navbar-dropdown {
+    position: relative !important;
+    height: 100%; /* Ensure dropdown button takes full height of the navbar */
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    padding: 0.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.dropdown-item {
+    padding: 0.5rem !important;
+    cursor: pointer !important;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0 !important;
 }

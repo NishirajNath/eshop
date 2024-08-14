@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { login } from "../../Services/authService";
-import "./Login.css";
-import { useHistory } from "react-router-dom"; 
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import { loginUser as loginUserService } from '../../Services/apiService'; // Import loginUser service
+import './Login.css'; // Ensure you have a CSS file for styling
+
+const cookies = new Cookies(); // Initialize cookies instance
 
 const Login = ({ onClose, onLoginSuccess }) => {
     const [formData, setFormData] = useState({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     });
-    const [isLoading, setIsLoading] = useState(false); // State to manage loading state of the button
-    const [error, setError] = useState(null); // State to manage login errors
-    const history = useHistory(); // Use useHistory hook to access history
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate(); // Use useNavigate hook for navigation
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,34 +25,34 @@ const Login = ({ onClose, onLoginSuccess }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true); // Enable loading state
+        setIsLoading(true);
+        setError(null);
 
         try {
-            const loginResponse = await login(formData.email, formData.password);
-            console.log("Login successful:", loginResponse);
-            onLoginSuccess(); // Notify parent component of successful login
-            history.push("/"); // Redirect to home page on successful login
+            const response = await loginUserService(formData); // Call the login API
+            const token = response.token; // Assuming the backend returns a JWT token
+            const username = response.email; // Assuming the backend returns the username
+
+            // Save token and username in cookies for later use
+            cookies.set('authToken', token, { path: '/' });
+            cookies.set('username', username, { path: '/' });
+
+            // Callback function to notify parent component of successful login
+            if (onLoginSuccess) onLoginSuccess(username); // Pass username to the parent
+
+            navigate('/'); // Redirect to home page on successful login
         } catch (error) {
-            console.error("Login error:", error);
-            setError("Invalid credentials. Please try again."); // Set error message
+            console.error('Login error:', error);
+            setError('Invalid credentials. Please try again.');
         } finally {
-            setIsLoading(false); // Reset loading state
+            setIsLoading(false);
         }
     };
 
-    const handleForgotPassword = () => {
-        console.log("Forgot password link clicked");
-        // Implement forgot password functionality (e.g., redirect to password reset page)
-    };
 
-    React.useEffect(() => {
-        // Add 'modal-open' class to body when component mounts
-        document.body.classList.add("modal-open");
-        return () => {
-            // Remove 'modal-open' class from body when component unmounts
-            document.body.classList.remove("modal-open");
-        };
-    }, []);
+    const handleForgotPassword = () => {
+        navigate('/forgot-password'); // Redirect to forgot password page
+    };
 
     return (
         <div className="modal">
@@ -73,12 +76,13 @@ const Login = ({ onClose, onLoginSuccess }) => {
                             onChange={handleChange}
                             required
                         />
+
                         <div className="forgot-password-link" onClick={handleForgotPassword}>
                             <span>Forgot Password?</span>
                         </div>
 
                         <button type="submit" disabled={isLoading}>
-                            {isLoading ? "Logging in..." : "Login"}
+                            {isLoading ? 'Logging in...' : 'Login'}
                         </button>
 
                         {error && (
@@ -91,7 +95,6 @@ const Login = ({ onClose, onLoginSuccess }) => {
                     <button className="close-button" onClick={onClose}>
                         X
                     </button>
-                    {/* Close button */}
                 </div>
             </div>
         </div>
