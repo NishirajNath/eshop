@@ -49,6 +49,7 @@ export default function App() {
 
     const toggleCart = () => {
         setIsCartOpen(!isCartOpen);
+        
     };
 
     const handleAddToCart = async (product) => {

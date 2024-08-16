@@ -60,7 +60,7 @@ const Cart = ({ toggleCart }) => {
                             <span> Quantity: {item.quantity} </span>
                             <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
                         </div>
-                        <p>Total: ₹{item.price * item.quantity}</p>
+                        <p>Total: ₹{item.product_unitPrice * item.quantity}</p>
                     </li>
                 ))}
             </ul>
@@ -74,7 +74,7 @@ const Cart = ({ toggleCart }) => {
                     />
                 </label>
                 <button onClick={handleCouponApply}>Apply Coupon</button>
-            </div>
+            </div>2
             <p>Discount: ₹{discount}</p>
             <p>Tax (18% GST): ₹{(totalAmount * 0.18).toFixed(2)}</p>
             <p>Delivery Charge: ₹{totalAmount > 100 ? 'Free' : '35'}</p>
