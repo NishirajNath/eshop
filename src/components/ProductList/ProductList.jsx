@@ -1,35 +1,10 @@
 import React from 'react';
 import './ProductList.css';
 import PropTypes from 'prop-types';
+import { useCart } from '../Cart/CartContext';
 
-const ProductList = ({ products, cartItems, addToCart, updateCartItemQuantity, searchQuery }) => {
-
-  const handleAddToCart = async (product) => {
-    try {
-      await addToCart(product);
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-      alert('Failed to add product to cart. Please try again.');
-    }
-  };
-
-  const handleIncreaseQuantity = async (productId) => {
-    try {
-      await updateCartItemQuantity(productId, 1); // Increase quantity by 1
-    } catch (error) {
-      console.error('Error increasing quantity:', error);
-      alert('Failed to update product quantity. Please try again.');
-    }
-  };
-
-  const handleDecreaseQuantity = async (productId) => {
-    try {
-      await updateCartItemQuantity(productId, -1); // Decrease quantity by 1
-    } catch (error) {
-      console.error('Error decreasing quantity:', error);
-      alert('Failed to update product quantity. Please try again.');
-    }
-  };
+const ProductList = ({ products, searchQuery }) => {
+  const { cartItems, handleAddToCart, handleUpdateCartItemQuantity } = useCart();
 
   return (
     <div className="product-list">
@@ -57,7 +32,7 @@ const ProductList = ({ products, cartItems, addToCart, updateCartItemQuantity, s
                   <div className="quantity-controls">
                     <button 
                       className="quantity-button" 
-                      onClick={() => handleDecreaseQuantity(product.product_id)}
+                      onClick={() => handleUpdateCartItemQuantity(product.product_id, -1)}
                       disabled={quantity <= 1}
                     >
                       -
@@ -65,7 +40,7 @@ const ProductList = ({ products, cartItems, addToCart, updateCartItemQuantity, s
                     <span className="quantity-display">{quantity}</span>
                     <button 
                       className="quantity-button" 
-                      onClick={() => handleIncreaseQuantity(product.product_id)}
+                      onClick={() => handleUpdateCartItemQuantity(product.product_id, 1)}
                     >
                       +
                     </button>
@@ -86,24 +61,7 @@ const ProductList = ({ products, cartItems, addToCart, updateCartItemQuantity, s
   );
 };
 
-// Add prop types for better validation
 ProductList.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.shape({
-    product_id: PropTypes.string.isRequired,
-    product_imageUrl: PropTypes.string.isRequired,
-    product_name: PropTypes.string.isRequired,
-    product_unitPrice: PropTypes.number.isRequired,
-    product_unitOfMeasurement: PropTypes.string.isRequired,
-    product_promotion: PropTypes.string,
-  })).isRequired,
-  cartItems: PropTypes.shape({
-    items: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-    })).isRequired,
-  }).isRequired,
-  addToCart: PropTypes.func.isRequired,
-  updateCartItemQuantity: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
 };
 

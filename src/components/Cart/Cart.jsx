@@ -1,106 +1,82 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Cart.css';
-import { getCart } from '../../Services/apiService';
+import { useCart } from './CartContext';
 
 const Cart = ({ toggleCart }) => {
-    const [cart, setCart] = useState([]);
-    const [coupon, setCoupon] = useState('');
-    const [discount, setDiscount] = useState(0);
+    const { cartItems, handleUpdateCartItemQuantity, handleRemoveFromCart, coupon, setCoupon, applyCoupon, totalAmount, discount, tax, deliveryCharge } = useCart();
     const [deliveryAddress, setDeliveryAddress] = useState('');
-    const [tip, setTip] = useState(0);
-    const [totalAmount, setTotalAmount] = useState(0);
 
-    useEffect(() => {
-        async function fetchCart() {
-            const cartItems = await getCart(); 
-            setCart(cartItems.items);
-        }
-        fetchCart();
-    }, []);
-
-    useEffect(() => {
-        calculateTotal();
-    }, [cart, discount, tip]);
-
-    const handleQuantityChange = (itemId, newQuantity) => {
-        const updatedCart = cart.map(item =>
-            item.id === itemId ? { ...item, quantity: newQuantity } : item
-        ).filter(item => item.quantity > 0);
-        setCart(updatedCart);
+    const handleQuantityChange = (itemId, quantityChange) => {
+        console.log(`Changing quantity for product ${itemId} by ${quantityChange}`);
+        handleUpdateCartItemQuantity(itemId, quantityChange);
     };
 
     const handleCouponApply = async () => {
-        const discountValue = await applyCoupon(coupon); // Implement applyCoupon in your API service
-        setDiscount(discountValue);
+        await applyCoupon(coupon);
     };
 
-    const calculateTotal = () => {
-        const subtotal = cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
-        const tax = subtotal * 0.18; // 18% GST (9% CGST + 9% SGST)
-        const deliveryCharge = subtotal > 100 ? 0 : 35;
-        const total = subtotal + tax + deliveryCharge - discount + parseFloat(tip);
-        setTotalAmount(total);
-    };
-
-    const handlePayment = () => {
-        alert('Proceeding to payment');
+    const handleCheckout = () => {
+        // Logic for checkout
     };
 
     return (
-        <div className="cart">
-            <button className="cart-close" onClick={toggleCart}>×</button>
-            <h2>Your Cart</h2>
-            <ul>
-                {cart.map(item => (
-                    <li key={item.product_UPC}>
+        <div className="cart-container">
+            <button className="close-cart" onClick={toggleCart}>X</button>
+            <h2>Shopping Cart</h2>
+            <div className="cart-items">
+                {cartItems.items.map(item => (
+                    <div key={item.product_id} className="cart-item">
                         <h5>{item.product_name}</h5>
-                        <p>Cost per unit: ₹{item.product_unitPrice}</p>
-                        <div>
-                            <button onClick={() => handleQuantityChange(item.product_id, item.quantity - 1)}>-</button>
-                            <span> Quantity: {item.quantity} </span>
-                            <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
+                        <div className="item-details">
+                            <p>Price: ₹{item.product_unitPrice.toFixed(2)}</p>
+                            <p>Unit: {item.product_unitOfMeasurement}</p>
+                            <div className="quantity-controls">
+                                <button 
+                                  className="quantity-button" 
+                                  onClick={() => handleQuantityChange(item.product_id, -1)}
+                                  disabled={item.quantity <= 1}
+                                >
+                                  -
+                                </button>
+                                <span className="quantity-display">{item.quantity}</span>
+                                <button 
+                                  className="quantity-button" 
+                                  onClick={() => handleQuantityChange(item.product_id, 1)}
+                                >
+                                  +
+                                </button>
+                            </div>
+                            <button 
+                              className="remove-button" 
+                              onClick={() => handleRemoveFromCart(item.product_id)}
+                            >
+                              Remove
+                            </button>
                         </div>
-                        <p>Total: ₹{item.product_unitPrice * item.quantity}</p>
-                    </li>
+                    </div>
                 ))}
-            </ul>
-            <div>
-                <label>
-                    Enter Coupon/Offer Code:
-                    <input
-                        type="text"
-                        value={coupon}
-                        onChange={(e) => setCoupon(e.target.value)}
-                    />
-                </label>
+            </div>
+            <div className="cart-summary">
+                <input 
+                  type="text" 
+                  placeholder="Enter coupon code" 
+                  value={coupon}
+                  onChange={(e) => setCoupon(e.target.value)}
+                />
                 <button onClick={handleCouponApply}>Apply Coupon</button>
-            </div>2
-            <p>Discount: ₹{discount}</p>
-            <p>Tax (18% GST): ₹{(totalAmount * 0.18).toFixed(2)}</p>
-            <p>Delivery Charge: ₹{totalAmount > 100 ? 'Free' : '35'}</p>
-            <p>Total Amount: ₹{totalAmount.toFixed(2)}</p>
-            <div>
-                <label>
-                    Delivery Address:
-                    <input
-                        type="text"
-                        value={deliveryAddress}
-                        onChange={(e) => setDeliveryAddress(e.target.value)}
-                    />
-                </label>
-                <button onClick={() => alert('Locate on Map')}>Locate on Map</button>
+                <p>Discount: ₹{discount}</p>
+                <p>Sub Total: ₹{cartItems.items.reduce((sum, item) => sum + item.product_unitPrice * item.quantity, 0).toFixed(2)}</p>
+                <p>Tax: ₹{tax.toFixed(2)}</p>
+                <p>Delivery Charge: ₹{deliveryCharge.toFixed(2)}</p>
+                <p>Total: ₹{totalAmount.toFixed(2)}</p>
+                <input 
+                  type="text" 
+                  placeholder="Enter delivery address" 
+                  value={deliveryAddress}
+                  onChange={(e) => setDeliveryAddress(e.target.value)}
+                />               
             </div>
-            <div>
-                <label>
-                    Tip for Delivery Person:
-                    <input
-                        type="number"
-                        value={tip}
-                        onChange={(e) => setTip(e.target.value)}
-                    />
-                </label>
-            </div>
-            <button onClick={handlePayment}>Make Payment</button>
+            <button className='Checkout' onClick={handleCheckout}>Checkout</button>
         </div>
     );
 };

@@ -1,30 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import './Navbar.css';
+import { useCart } from '../Cart/CartContext'; // Import useCart from CartContext
 
-const Navbar = ({ toggleCart, onSearchChange, username, setUsername, cartItems }) => {
+const Navbar = ({ toggleCart, onSearchChange, username, setUsername }) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const [showSignup, setShowSignup] = useState(false);
     const navigate = useNavigate();
     const cookies = new Cookies();
 
+    const { cartItems } = useCart(); // Use CartContext to get cartItems
+
     const handleLogout = () => {
-        cookies.remove('authToken', { path: '/' }); // Remove the auth token from cookies
-        cookies.remove('username', { path: '/' }); // Remove the username from cookies
+        cookies.remove('authToken', { path: '/' });
+        cookies.remove('username', { path: '/' });
         setUsername(null);
         setShowDropdown(false);
-        navigate('/'); // Redirect to home page
+        navigate('/');
     };
 
     const handleLoginSuccess = (username) => {
         setShowLogin(false);
         setUsername(username);
-        cookies.set('username', username, { path: '/' }); // Save username in cookies
-        navigate('/'); // Redirect to home page
+        cookies.set('username', username, { path: '/' });
+        navigate('/');
     };
 
     const toggleDropdown = () => {
@@ -46,7 +49,7 @@ const Navbar = ({ toggleCart, onSearchChange, username, setUsername, cartItems }
     };
 
     // Calculate the total number of items in the cart
-    const totalCartItems = cartItems.items.reduce((total, item) => total + item.quantity, 0);
+    const totalCartItems = cartItems?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
 
     return (
         <div className='navbar'>

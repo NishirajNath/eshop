@@ -111,26 +111,32 @@ export const removeFromCart = async (productId) => {
     }
 };
 
+// Update item quantity in the cart
 export const updateCartItemQuantity = async (productId, quantityChange) => {
+    const userId = cookies.get('username');
     try {
         const response = await fetch(`${baseURL}carts/update-item/${productId}`, {
-            method: 'PATCH', // Use PATCH or PUT based on your API design
+            method: 'PATCH', // Use PATCH to partially update the resource
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ quantityChange }),
+            body: JSON.stringify({ userId, quantityChange }), // Include userId with the request
         });
 
         if (!response.ok) {
             throw new Error('Failed to update cart item quantity');
         }
 
-        return response.json(); // Return the updated cart item or status if needed
+        const data = await response.json(); // Retrieve the response data
+
+        // Process the updated cart details as needed
+        return data; // Return the updated cart data or status if needed
     } catch (error) {
         console.error('Error updating cart item quantity:', error);
         throw error;
     }
 };
+
 
 export const checkout = async (order) => {
     try {
